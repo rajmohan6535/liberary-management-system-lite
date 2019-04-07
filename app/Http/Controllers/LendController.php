@@ -114,7 +114,7 @@ class LendController extends Controller
             'due_date' => now()->addDays(env('DEFAULT_DUE_DATE', 10))->endOfDay()
         ]);
 
-        return back();
+        return redirect()->route('myLends')->with(['msg' => 'contact admin to collect your book']);
     }
 
     public function lendActionSummary($action, $lendId)
@@ -158,6 +158,6 @@ class LendController extends Controller
     {
         $lends = Lend::whereUserId(auth()->id())->paginate();
 
-        return view('lend-history', compact('lends'));
+        return view('lend-history', compact('lends'))->with(['msg' => session('msg')]);
     }
 }

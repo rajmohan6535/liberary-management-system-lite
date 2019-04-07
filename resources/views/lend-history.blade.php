@@ -18,8 +18,10 @@
                     <tr>
                         <th>#</th>
                         <th>Book Name</th>
-                        <th>Paid</th>
                         <th>Due Date</th>
+                        <th>Paid</th>
+                        <th>Fine</th>
+                        <th>Total</th>
                         <th>Status</th>
                     </tr>
                     </thead>
@@ -29,8 +31,10 @@
                         <tr>
                             <td>{{$lend->id}}</td>
                             <td>{{$lend->book->name}}</td>
-                            <td>{{$lend->paid+$lend->fine}}</td>
-                            <td>{{\Carbon\Carbon::parse($lend->due_date)->format('M d y h:i A')}}</td>
+                            <td>{{\Carbon\Carbon::parse($lend->due_date)->format('M d Y h:i A')}}</td>
+                            <td>Rs. {{$lend->paid}}</td>
+                            <td>Rs. {{$lend->fine}}</td>
+                            <td>Rs. {{$lend->paid+$lend->fine}}</td>
                             <td>{!! $lend->getStatusHtml() !!}</td>
                         </tr>
                     @endforeach
