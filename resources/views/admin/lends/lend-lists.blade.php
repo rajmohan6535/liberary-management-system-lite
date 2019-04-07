@@ -19,6 +19,7 @@
                         <tr>
                             <th>#</th>
                             <th>Member Name</th>
+                            <th>Member Contact Number</th>
                             <th>Book Name</th>
                             <th>Paid</th>
                             <th>Status</th>
@@ -32,6 +33,7 @@
                             <tr>
                                 <td>{{$lend->id}}</td>
                                 <td>{{$lend->user->name}}</td>
+                                <td>{{$lend->user->phone}}</td>
                                 <td>{{$lend->book->name}}</td>
                                 <td>{{$lend->paid+$lend->fine}}</td>
                                 <td>{!! $lend->getStatusHtml() !!}</td>
