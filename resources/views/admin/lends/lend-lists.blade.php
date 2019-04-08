@@ -8,8 +8,8 @@
                 <div class="x_title">
                     <h2>Books</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
-                        <li><a href="{{route('books.create')}}" class="btn btn-primary"><i
-                                        class="fa fa-plus-circle"></i> Add New Book</a>
+                        <li><a href="{{route('lends.create')}}" class="btn btn-primary"><i
+                                        class="fa fa-plus-circle"></i> Lend a book</a>
                     </ul>
                     <div class="clearfix"></div>
                 </div>

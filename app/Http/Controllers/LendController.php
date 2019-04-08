@@ -26,23 +26,24 @@ class LendController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.lends.lend-form');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $this->validate($request, [
-            'book_id' => ['required', 'exits:books'],
+            'book_id' => ['required', 'exists:books,id'],
+            'user_id' => ['required', 'exists:users,id'],
         ]);
 
         $lend = Lend::create([
-            'user_id' => $request->user()->id,
+            'user_id' => $request->user_id,
             'book_id' => $request->book_id,
             'fine' => 0,
             'paid' => 0,
@@ -50,14 +51,14 @@ class LendController extends Controller
             'due_date' => now()->addDays(env('DEFAULT_DUE_DATE', 10))->endOfDay()
         ]);
 
-        return back();
+        return back()->with(['msg' => 'Successfully lend a book']);
 //        return view()
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Lend $lend
+     * @param \App\Lend $lend
      * @return \Illuminate\Http\Response
      */
     public function show(Lend $lend)
@@ -68,7 +69,7 @@ class LendController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Lend $lend
+     * @param \App\Lend $lend
      * @return \Illuminate\Http\Response
      */
     public function edit(Lend $lend)
@@ -79,8 +80,8 @@ class LendController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Lend $lend
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Lend $lend
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Lend $lend)
@@ -91,7 +92,7 @@ class LendController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Lend $lend
+     * @param \App\Lend $lend
      * @return \Illuminate\Http\Response
      */
     public function destroy(Lend $lend)
